@@ -1,0 +1,95 @@
+<odoo>
+    <record id="view_ipfarm_pemrosesan_tree" model="ir.ui.view">
+        <field name="name">ipfarm.pemrosesan.tree</field>
+        <field name="model">ipfarm.pemrosesan</field>
+        <field name="arch" type="xml">
+            <tree string="Pemrosesan Produk" create="1" edit="0" delete="0">
+                <field name="tanggal_pemrosesan"/>
+                <field name="name"/>
+                <field name="produk_id"/>
+                <field name="jenis_pemrosesan"/>
+                <field name="jumlah" sum="Total Diproses"/>
+                <field name="uom_id"/>
+                <field name="pegawai_id"/>
+                <field name="histori_stok_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_pemrosesan_form" model="ir.ui.view">
+        <field name="name">ipfarm.pemrosesan.form</field>
+        <field name="model">ipfarm.pemrosesan</field>
+        <field name="arch" type="xml">
+            <form string="Pemrosesan Produk" delete="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="tanggal_pemrosesan" required="1"/>
+                            <field name="produk_id" required="1"/>
+                            <field name="jenis_pemrosesan" required="1"/>
+                        </group>
+                        <group>
+                            <field name="jumlah" required="1"/>
+                            <field name="uom_id" required="1"/>
+                            <field name="pegawai_id" required="1"/>
+                            <field name="histori_stok_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Catatan">
+                            <field name="catatan" placeholder="Catatan pemrosesan produk..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_pemrosesan_search" model="ir.ui.view">
+        <field name="name">ipfarm.pemrosesan.search</field>
+        <field name="model">ipfarm.pemrosesan</field>
+        <field name="arch" type="xml">
+            <search string="Cari Pemrosesan">
+                <field name="name"/>
+                <field name="produk_id"/>
+                <field name="jenis_pemrosesan"/>
+                <field name="pegawai_id"/>
+                <field name="tanggal_pemrosesan"/>
+                <filter name="group_produk" string="Produk" context="{'group_by': 'produk_id'}"/>
+                <filter name="group_jenis" string="Jenis Pemrosesan" context="{'group_by': 'jenis_pemrosesan'}"/>
+                <filter name="group_tanggal" string="Tanggal Pemrosesan" context="{'group_by': 'tanggal_pemrosesan'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_pemrosesan_graph" model="ir.ui.view">
+        <field name="name">ipfarm.pemrosesan.graph</field>
+        <field name="model">ipfarm.pemrosesan</field>
+        <field name="arch" type="xml">
+            <graph string="Grafik Pemrosesan Produk" type="bar">
+                <field name="produk_id"/>
+                <field name="jumlah" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_pemrosesan_pivot" model="ir.ui.view">
+        <field name="name">ipfarm.pemrosesan.pivot</field>
+        <field name="model">ipfarm.pemrosesan</field>
+        <field name="arch" type="xml">
+            <pivot string="Pivot Pemrosesan Produk">
+                <field name="produk_id" type="row"/>
+                <field name="tanggal_pemrosesan" type="col"/>
+                <field name="jumlah" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_ipfarm_pemrosesan" model="ir.actions.act_window">
+        <field name="name">Pemrosesan Produk</field>
+        <field name="res_model">ipfarm.pemrosesan</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="search_view_id" ref="view_ipfarm_pemrosesan_search"/>
+    </record>
+</odoo>

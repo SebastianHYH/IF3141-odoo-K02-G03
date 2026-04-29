@@ -1,0 +1,110 @@
+<odoo>
+    <record id="view_ipfarm_histori_stok_tree" model="ir.ui.view">
+        <field name="name">ipfarm.histori_stok.tree</field>
+        <field name="model">ipfarm.histori_stok</field>
+        <field name="arch" type="xml">
+            <tree string="Riwayat Perubahan Stok" create="0" edit="0" delete="0" decoration-success="arah == 'masuk'" decoration-danger="arah == 'keluar'">
+                <field name="tanggal"/>
+                <field name="produk_id"/>
+                <field name="jenis_kegiatan"/>
+                <field name="arah"/>
+                <field name="jumlah_masuk" sum="Total Masuk"/>
+                <field name="jumlah_keluar" sum="Total Keluar"/>
+                <field name="uom_id"/>
+                <field name="panen_id"/>
+                <field name="pemrosesan_id"/>
+                <field name="pegawai_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_histori_stok_form" model="ir.ui.view">
+        <field name="name">ipfarm.histori_stok.form</field>
+        <field name="model">ipfarm.histori_stok</field>
+        <field name="arch" type="xml">
+            <form string="Detail Riwayat Stok" create="0" edit="0" delete="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="tanggal"/>
+                            <field name="produk_id"/>
+                            <field name="jenis_kegiatan"/>
+                            <field name="arah"/>
+                        </group>
+                        <group>
+                            <field name="jumlah"/>
+                            <field name="jumlah_masuk"/>
+                            <field name="jumlah_keluar"/>
+                            <field name="uom_id"/>
+                            <field name="pegawai_id"/>
+                        </group>
+                    </group>
+                    <group string="Referensi">
+                        <field name="panen_id"/>
+                        <field name="pemrosesan_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Catatan">
+                            <field name="catatan"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_histori_stok_search" model="ir.ui.view">
+        <field name="name">ipfarm.histori_stok.search</field>
+        <field name="model">ipfarm.histori_stok</field>
+        <field name="arch" type="xml">
+            <search string="Cari Riwayat Stok">
+                <field name="produk_id"/>
+                <field name="jenis_kegiatan"/>
+                <field name="arah"/>
+                <field name="pegawai_id"/>
+                <field name="tanggal"/>
+                <filter name="kegiatan_panen" string="Panen" domain="[('jenis_kegiatan', '=', 'panen')]"/>
+                <filter name="kegiatan_pemrosesan" string="Pemrosesan" domain="[('jenis_kegiatan', '=', 'pemrosesan')]"/>
+                <filter name="arah_masuk" string="Masuk" domain="[('arah', '=', 'masuk')]"/>
+                <filter name="arah_keluar" string="Keluar" domain="[('arah', '=', 'keluar')]"/>
+                <separator/>
+                <filter name="group_produk" string="Produk" context="{'group_by': 'produk_id'}"/>
+                <filter name="group_kegiatan" string="Jenis Kegiatan" context="{'group_by': 'jenis_kegiatan'}"/>
+                <filter name="group_tanggal" string="Tanggal" context="{'group_by': 'tanggal'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_histori_stok_graph" model="ir.ui.view">
+        <field name="name">ipfarm.histori_stok.graph</field>
+        <field name="model">ipfarm.histori_stok</field>
+        <field name="arch" type="xml">
+            <graph string="Grafik Pergerakan Stok" type="bar">
+                <field name="produk_id"/>
+                <field name="jumlah_masuk" type="measure"/>
+                <field name="jumlah_keluar" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_histori_stok_pivot" model="ir.ui.view">
+        <field name="name">ipfarm.histori_stok.pivot</field>
+        <field name="model">ipfarm.histori_stok</field>
+        <field name="arch" type="xml">
+            <pivot string="Pivot Pergerakan Stok">
+                <field name="produk_id" type="row"/>
+                <field name="jenis_kegiatan" type="col"/>
+                <field name="jumlah_masuk" type="measure"/>
+                <field name="jumlah_keluar" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_ipfarm_histori_stok" model="ir.actions.act_window">
+        <field name="name">Riwayat Perubahan Stok</field>
+        <field name="res_model">ipfarm.histori_stok</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="search_view_id" ref="view_ipfarm_histori_stok_search"/>
+    </record>
+</odoo>
