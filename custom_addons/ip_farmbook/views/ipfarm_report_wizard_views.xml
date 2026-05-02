@@ -1,0 +1,34 @@
+<odoo>
+    <record id="view_ipfarm_report_wizard_form" model="ir.ui.view">
+        <field name="name">ipfarm.report_wizard.form</field>
+        <field name="model">ipfarm.report_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Export Rekap Operasional" create="0" edit="1" delete="0">
+                <header>
+                    <button name="action_export_pdf" type="object" string="Export PDF" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_start" required="1"/>
+                            <field name="date_end" required="1"/>
+                            <field name="jenis_data" required="1"/>
+                        </group>
+                        <group>
+                            <field name="produk_id"/>
+                            <field name="ruangan_id"/>
+                            <field name="format_output" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ipfarm_report_wizard" model="ir.actions.act_window">
+        <field name="name">Export Rekap Operasional</field>
+        <field name="res_model">ipfarm.report_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

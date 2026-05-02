@@ -1,0 +1,70 @@
+<odoo>
+    <template id="report_ipfarm_operasional">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Rekap Operasional IP FarmBook</h2>
+                    <h3><span t-esc="title"/></h3>
+                    <p>
+                        <strong>Periode:</strong>
+                        <span t-esc="wizard.date_start"/> s.d. <span t-esc="wizard.date_end"/>
+                    </p>
+                    <p>
+                        <strong>Tanggal Pembuatan:</strong>
+                        <span t-esc="generated_at"/>
+                    </p>
+                    <p>
+                        <strong>Pembuat:</strong>
+                        <span t-esc="user.name"/>
+                    </p>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Produk</th>
+                                <th>Referensi</th>
+                                <th>Keterangan</th>
+                                <th class="text-end">Masuk</th>
+                                <th class="text-end">Keluar</th>
+                                <th>Satuan</th>
+                                <th>Pegawai</th>
+                                <th class="text-end">Stok Akhir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-if="not lines">
+                                <td colspan="9" class="text-center">Tidak ada data pada periode dan filter yang dipilih.</td>
+                            </tr>
+                            <tr t-foreach="lines" t-as="line">
+                                <td><span t-esc="line.get('tanggal') or '-'"/></td>
+                                <td><span t-esc="line.get('produk')"/></td>
+                                <td><span t-esc="line.get('referensi')"/></td>
+                                <td><span t-esc="line.get('keterangan') or '-'"/></td>
+                                <td class="text-end"><span t-esc="'%.2f' % line.get('masuk', 0.0)"/></td>
+                                <td class="text-end"><span t-esc="'%.2f' % line.get('keluar', 0.0)"/></td>
+                                <td><span t-esc="line.get('satuan')"/></td>
+                                <td><span t-esc="line.get('pegawai')"/></td>
+                                <td class="text-end"><span t-esc="'%.2f' % line.get('stok_akhir', 0.0)"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4>Ringkasan</h4>
+                    <table class="table table-sm">
+                        <tr>
+                            <td>Total Hasil/Stok Masuk</td>
+                            <td class="text-end"><span t-esc="'%.2f' % summary.get('total_masuk', 0.0)"/></td>
+                        </tr>
+                        <tr>
+                            <td>Total Stok Keluar/Pemrosesan</td>
+                            <td class="text-end"><span t-esc="'%.2f' % summary.get('total_keluar', 0.0)"/></td>
+                        </tr>
+                        <tr>
+                            <td>Stok Akhir</td>
+                            <td class="text-end"><span t-esc="'%.2f' % summary.get('stok_akhir', 0.0)"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
