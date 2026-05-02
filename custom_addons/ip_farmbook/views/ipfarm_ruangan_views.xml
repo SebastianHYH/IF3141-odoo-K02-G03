@@ -1,0 +1,54 @@
+<odoo>
+    <record id="view_ipfarm_ruangan_tree" model="ir.ui.view">
+        <field name="name">ipfarm.ruangan.tree</field>
+        <field name="model">ipfarm.ruangan</field>
+        <field name="arch" type="xml">
+            <tree string="Ruangan Tanam">
+                <field name="kode"/>
+                <field name="name"/>
+                <field name="lokasi"/>
+                <field name="kapasitas"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_ipfarm_ruangan_form" model="ir.ui.view">
+        <field name="name">ipfarm.ruangan.form</field>
+        <field name="model">ipfarm.ruangan</field>
+        <field name="arch" type="xml">
+            <form string="Ruangan Tanam">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="kode"/>
+                            <field name="name"/>
+                            <field name="lokasi"/>
+                        </group>
+                        <group>
+                            <field name="kapasitas"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <field name="catatan" placeholder="Catatan ruangan..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_ipfarm_ruangan_search" model="ir.ui.view">
+        <field name="name">ipfarm.ruangan.search</field>
+        <field name="model">ipfarm.ruangan</field>
+        <field name="arch" type="xml">
+            <search string="Cari Ruangan">
+                <field name="name"/>
+                <field name="kode"/>
+                <field name="lokasi"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_ipfarm_ruangan" model="ir.actions.act_window">
+        <field name="name">Ruangan Tanam</field>
+        <field name="res_model">ipfarm.ruangan</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_ipfarm_ruangan_search"/>
+    </record>
+</odoo>

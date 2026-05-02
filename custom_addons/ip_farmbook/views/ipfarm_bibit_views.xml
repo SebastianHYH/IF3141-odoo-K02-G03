@@ -1,0 +1,55 @@
+<odoo>
+    <record id="view_ipfarm_bibit_tree" model="ir.ui.view">
+        <field name="name">ipfarm.bibit.tree</field>
+        <field name="model">ipfarm.bibit</field>
+        <field name="arch" type="xml">
+            <tree string="Bibit">
+                <field name="kode"/>
+                <field name="name"/>
+                <field name="kategori"/>
+                <field name="estimasi_hari_panen"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_ipfarm_bibit_form" model="ir.ui.view">
+        <field name="name">ipfarm.bibit.form</field>
+        <field name="model">ipfarm.bibit</field>
+        <field name="arch" type="xml">
+            <form string="Bibit">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="kode"/>
+                            <field name="name"/>
+                            <field name="kategori"/>
+                        </group>
+                        <group>
+                            <field name="estimasi_hari_panen"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <field name="catatan" placeholder="Catatan bibit..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_ipfarm_bibit_search" model="ir.ui.view">
+        <field name="name">ipfarm.bibit.search</field>
+        <field name="model">ipfarm.bibit</field>
+        <field name="arch" type="xml">
+            <search string="Cari Bibit">
+                <field name="name"/>
+                <field name="kode"/>
+                <field name="kategori"/>
+                <filter name="group_kategori" string="Kategori" context="{'group_by': 'kategori'}"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_ipfarm_bibit" model="ir.actions.act_window">
+        <field name="name">Bibit</field>
+        <field name="res_model">ipfarm.bibit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_ipfarm_bibit_search"/>
+    </record>
+</odoo>

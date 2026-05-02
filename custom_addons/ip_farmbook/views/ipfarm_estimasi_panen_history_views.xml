@@ -1,0 +1,64 @@
+<odoo>
+    <record id="view_ipfarm_estimasi_tree" model="ir.ui.view">
+        <field name="name">ipfarm.estimasi_panen_history.tree</field>
+        <field name="model">ipfarm.estimasi_panen_history</field>
+        <field name="arch" type="xml">
+            <tree string="Histori Estimasi Panen" create="1" delete="0">
+                <field name="tanggal_pembaruan"/>
+                <field name="batch_id"/>
+                <field name="tanggal_tanam"/>
+                <field name="ruangan_id"/>
+                <field name="estimasi_panen_lama"/>
+                <field name="estimasi_panen_baru"/>
+                <field name="pegawai_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_ipfarm_estimasi_form" model="ir.ui.view">
+        <field name="name">ipfarm.estimasi_panen_history.form</field>
+        <field name="model">ipfarm.estimasi_panen_history</field>
+        <field name="arch" type="xml">
+            <form string="Update Estimasi Panen" delete="0">
+                <header>
+                    <button name="action_show_success" type="object" string="Tampilkan Notifikasi" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="batch_id" required="1"/>
+                            <field name="tanggal_tanam"/>
+                            <field name="ruangan_id"/>
+                            <field name="estimasi_panen_lama"/>
+                        </group>
+                        <group>
+                            <field name="estimasi_panen_baru" required="1"/>
+                            <field name="pegawai_id" required="1"/>
+                            <field name="tanggal_pembaruan" required="1"/>
+                        </group>
+                    </group>
+                    <field name="catatan" placeholder="Catatan perubahan estimasi..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_ipfarm_estimasi_search" model="ir.ui.view">
+        <field name="name">ipfarm.estimasi_panen_history.search</field>
+        <field name="model">ipfarm.estimasi_panen_history</field>
+        <field name="arch" type="xml">
+            <search string="Cari Estimasi Panen">
+                <field name="batch_id"/>
+                <field name="ruangan_id"/>
+                <field name="pegawai_id"/>
+                <field name="tanggal_pembaruan"/>
+                <filter name="group_batch" string="Batch" context="{'group_by': 'batch_id'}"/>
+                <filter name="group_ruangan" string="Ruangan" context="{'group_by': 'ruangan_id'}"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_ipfarm_estimasi_panen" model="ir.actions.act_window">
+        <field name="name">Estimasi Waktu Panen</field>
+        <field name="res_model">ipfarm.estimasi_panen_history</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_ipfarm_estimasi_search"/>
+    </record>
+</odoo>

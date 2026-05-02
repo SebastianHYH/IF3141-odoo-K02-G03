@@ -1,0 +1,101 @@
+<odoo>
+    <record id="view_ipfarm_batch_tree" model="ir.ui.view">
+        <field name="name">ipfarm.batch.tree</field>
+        <field name="model">ipfarm.batch</field>
+        <field name="arch" type="xml">
+            <tree string="Batch/Penanaman">
+                <field name="name"/>
+                <field name="penanaman_id"/>
+                <field name="bibit_id"/>
+                <field name="ruangan_id"/>
+                <field name="jumlah_bibit"/>
+                <field name="produk_rencana_id"/>
+                <field name="tanggal_tanam"/>
+                <field name="estimasi_panen"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_batch_form" model="ir.ui.view">
+        <field name="name">ipfarm.batch.form</field>
+        <field name="model">ipfarm.batch</field>
+        <field name="arch" type="xml">
+            <form string="Batch/Penanaman">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="penanaman_id"/>
+                            <field name="bibit_id"/>
+                            <field name="ruangan_id"/>
+                            <field name="jumlah_bibit"/>
+                            <field name="produk_rencana_id"/>
+                            <field name="tanggal_tanam"/>
+                        </group>
+                        <group>
+                            <field name="estimasi_panen"/>
+                            <field name="pegawai_estimasi_id"/>
+                            <field name="tanggal_update_estimasi"/>
+                            <field name="state"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Catatan">
+                            <field name="catatan"/>
+                        </page>
+                        <page string="Histori Estimasi Panen">
+                            <field name="estimasi_history_ids" readonly="1">
+                                <tree create="0" edit="0" delete="0">
+                                    <field name="tanggal_pembaruan"/>
+                                    <field name="estimasi_panen_lama"/>
+                                    <field name="estimasi_panen_baru"/>
+                                    <field name="pegawai_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Hasil Panen">
+                            <field name="panen_ids" readonly="1">
+                                <tree create="0" edit="0" delete="0">
+                                    <field name="tanggal_panen"/>
+                                    <field name="name"/>
+                                    <field name="produk_id"/>
+                                    <field name="jumlah"/>
+                                    <field name="uom_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ipfarm_batch_search" model="ir.ui.view">
+        <field name="name">ipfarm.batch.search</field>
+        <field name="model">ipfarm.batch</field>
+        <field name="arch" type="xml">
+            <search string="Cari Batch">
+                <field name="name"/>
+                <field name="penanaman_id"/>
+                <field name="bibit_id"/>
+                <field name="ruangan_id"/>
+                <field name="produk_rencana_id"/>
+                <field name="tanggal_tanam"/>
+                <field name="estimasi_panen"/>
+                <filter name="aktif" string="Aktif" domain="[('state', '=', 'aktif')]"/>
+                <filter name="panen" string="Panen" domain="[('state', '=', 'panen')]"/>
+                <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                <filter name="group_ruangan" string="Ruangan" context="{'group_by': 'ruangan_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ipfarm_batch" model="ir.actions.act_window">
+        <field name="name">Batch/Penanaman</field>
+        <field name="res_model">ipfarm.batch</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_ipfarm_batch_search"/>
+    </record>
+</odoo>
