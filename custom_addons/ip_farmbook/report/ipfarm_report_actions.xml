@@ -1,0 +1,10 @@
+<odoo>
+    <record id="action_report_ipfarm_operasional" model="ir.actions.report">
+        <field name="name">Rekap Operasional IP FarmBook</field>
+        <field name="model">ipfarm.report_wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ip_farmbook.report_ipfarm_operasional</field>
+        <field name="report_file">ip_farmbook.report_ipfarm_operasional</field>
+        <field name="print_report_name">'Rekap Operasional IP FarmBook'</field>
+    </record>
+</odoo>
