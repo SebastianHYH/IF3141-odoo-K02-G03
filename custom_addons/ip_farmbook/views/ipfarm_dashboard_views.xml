@@ -1,0 +1,56 @@
+<odoo>
+  <record id="view_ipfarm_dashboard_wizard_form" model="ir.ui.view">
+    <field name="name">ipfarm.dashboard_wizard.form</field>
+    <field name="model">ipfarm.dashboard_wizard</field>
+    <field name="arch" type="xml">
+      <form string="Dashboard Analitik Operasional" create="0" edit="1" delete="0">
+        <header>
+          <button name="action_refresh" type="object" string="Terapkan Filter" class="oe_highlight"/>
+          <button name="action_open_panen" type="object" string="Grafik Panen"/>
+          <button name="action_open_histori_stok" type="object" string="Grafik Stok"/>
+        </header>
+        <sheet>
+          <group string="Filter">
+            <group>
+              <field name="date_start"/>
+              <field name="date_end"/>
+            </group>
+            <group>
+              <field name="produk_id"/>
+              <field name="ruangan_id"/>
+              <field name="batch_id"/>
+            </group>
+          </group>
+          <group string="KPI Operasional">
+            <group>
+              <field name="batch_aktif_count"/>
+              <field name="penanaman_berjalan_count"/>
+              <field name="estimasi_panen_terdekat"/>
+              <field name="produk_stok_rendah_count"/>
+            </group>
+            <group>
+              <field name="total_hasil_panen"/>
+              <field name="stok_produk_terkini"/>
+              <field name="total_stok_masuk"/>
+              <field name="total_stok_keluar"/>
+              <field name="total_pemrosesan"/>
+            </group>
+          </group>
+          <group string="Prediksi Sederhana">
+            <field name="prediksi_html" nolabel="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    
+  </record>
+
+  <record id="action_ipfarm_dashboard_wizard" model="ir.actions.act_window">
+    <field name="name">Dashboard Analitik Operasional</field>
+    <field name="res_model">ipfarm.dashboard_wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">current</field>
+    <field name="context">{}</field>
+
+  </record>
+</odoo>
