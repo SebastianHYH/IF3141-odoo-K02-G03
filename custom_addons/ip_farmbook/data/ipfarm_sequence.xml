@@ -1,0 +1,22 @@
+<odoo noupdate="1">
+    <record id="seq_ipfarm_panen" model="ir.sequence">
+        <field name="name">Nomor Hasil Panen</field>
+        <field name="code">ipfarm.panen</field>
+        <field name="prefix">PAN/%(year)s/</field>
+        <field name="padding">5</field>
+    </record>
+
+    <record id="seq_ipfarm_penanaman" model="ir.sequence">
+        <field name="name">Kode Penanaman</field>
+        <field name="code">ipfarm.penanaman</field>
+        <field name="prefix">TAN/%(year)s/</field>
+        <field name="padding">5</field>
+    </record>
+
+    <record id="seq_ipfarm_pemrosesan" model="ir.sequence">
+        <field name="name">Nomor Pemrosesan Produk</field>
+        <field name="code">ipfarm.pemrosesan</field>
+        <field name="prefix">PRS/%(year)s/</field>
+        <field name="padding">5</field>
+    </record>
+</odoo>

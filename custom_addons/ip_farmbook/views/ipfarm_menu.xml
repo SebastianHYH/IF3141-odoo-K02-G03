@@ -1,0 +1,152 @@
+<odoo>
+    <menuitem
+        id="menu_ipfarm_root"
+        name="IP FarmBook"
+        sequence="10"
+        groups="ip_farmbook.group_ipfarm_user"/>
+
+    <menuitem
+        id="menu_ipfarm_master"
+        name="Master Data"
+        parent="menu_ipfarm_root"
+        sequence="10"
+        groups="ip_farmbook.group_ipfarm_user"/>
+
+    <menuitem
+        id="menu_ipfarm_produk"
+        name="Produk"
+        parent="menu_ipfarm_master"
+        action="action_ipfarm_produk"
+        sequence="10"
+        groups="ip_farmbook.group_ipfarm_user"/>
+
+    <menuitem
+        id="menu_ipfarm_bibit"
+        name="Bibit"
+        parent="menu_ipfarm_master"
+        action="action_ipfarm_bibit"
+        sequence="20"
+        groups="ip_farmbook.group_ipfarm_user"/>
+
+    <menuitem
+        id="menu_ipfarm_ruangan"
+        name="Ruangan Tanam"
+        parent="menu_ipfarm_master"
+        action="action_ipfarm_ruangan"
+        sequence="30"
+        groups="ip_farmbook.group_ipfarm_user"/>
+
+    <menuitem
+        id="menu_ipfarm_batch"
+        name="Batch/Penanaman"
+        parent="menu_ipfarm_master"
+        action="action_ipfarm_batch"
+        sequence="40"
+        groups="ip_farmbook.group_ipfarm_user"/>
+
+    <menuitem
+        id="menu_ipfarm_pembibitan"
+        name="Pembibitan"
+        parent="menu_ipfarm_root"
+        sequence="15"
+        groups="ip_farmbook.group_ipfarm_seedling,ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_penanaman"
+        name="Penanaman Bibit"
+        parent="menu_ipfarm_pembibitan"
+        action="action_ipfarm_penanaman"
+        sequence="10"
+        groups="ip_farmbook.group_ipfarm_seedling,ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_produksi"
+        name="Produksi"
+        parent="menu_ipfarm_root"
+        sequence="20"
+        groups="ip_farmbook.group_ipfarm_production,ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_panen"
+        name="Hasil Panen"
+        parent="menu_ipfarm_produksi"
+        action="action_ipfarm_panen"
+        sequence="10"
+        groups="ip_farmbook.group_ipfarm_production,ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_estimasi_panen"
+        name="Estimasi Waktu Panen"
+        parent="menu_ipfarm_produksi"
+        action="action_ipfarm_estimasi_panen"
+        sequence="20"
+        groups="ip_farmbook.group_ipfarm_production,ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_processing"
+        name="Processing"
+        parent="menu_ipfarm_root"
+        sequence="30"
+        groups="ip_farmbook.group_ipfarm_processing,ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_pemrosesan"
+        name="Pemrosesan Produk"
+        parent="menu_ipfarm_processing"
+        action="action_ipfarm_pemrosesan"
+        sequence="10"
+        groups="ip_farmbook.group_ipfarm_processing,ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_stok"
+        name="Stok"
+        parent="menu_ipfarm_root"
+        sequence="40"
+        groups="ip_farmbook.group_ipfarm_user"/>
+
+    <menuitem
+        id="menu_ipfarm_ketersediaan_stok"
+        name="Ketersediaan Stok Produk"
+        parent="menu_ipfarm_stok"
+        action="action_ipfarm_ketersediaan_stok"
+        sequence="10"
+        groups="ip_farmbook.group_ipfarm_user"/>
+
+    <menuitem
+        id="menu_ipfarm_histori_stok"
+        name="Riwayat Perubahan Stok"
+        parent="menu_ipfarm_stok"
+        action="action_ipfarm_histori_stok"
+        sequence="20"
+        groups="ip_farmbook.group_ipfarm_user"/>
+
+    <menuitem
+        id="menu_ipfarm_management"
+        name="Management"
+        parent="menu_ipfarm_root"
+        sequence="50"
+        groups="ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_dashboard"
+        name="Dashboard Operasional"
+        parent="menu_ipfarm_management"
+        action="action_ipfarm_dashboard_wizard"
+        sequence="10"
+        groups="ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_finance"
+        name="Finance &amp; Accounting"
+        parent="menu_ipfarm_root"
+        sequence="60"
+        groups="ip_farmbook.group_ipfarm_finance,ip_farmbook.group_ipfarm_management"/>
+
+    <menuitem
+        id="menu_ipfarm_report_operasional"
+        name="Export Rekap Operasional"
+        parent="menu_ipfarm_finance"
+        action="action_ipfarm_report_wizard"
+        sequence="10"
+        groups="ip_farmbook.group_ipfarm_finance,ip_farmbook.group_ipfarm_management"/>
+</odoo>
