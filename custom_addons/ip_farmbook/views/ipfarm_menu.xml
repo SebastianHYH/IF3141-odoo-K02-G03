@@ -74,13 +74,6 @@
         sequence="10"
         groups="ip_farmbook.group_ipfarm_production,ip_farmbook.group_ipfarm_management"/>
 
-    <menuitem
-        id="menu_ipfarm_estimasi_panen"
-        name="Kelola Batch"
-        parent="menu_ipfarm_produksi"
-        action="action_ipfarm_estimasi_panen"
-        sequence="20"
-        groups="ip_farmbook.group_ipfarm_production,ip_farmbook.group_ipfarm_management"/>
 
     <menuitem
         id="menu_ipfarm_processing"

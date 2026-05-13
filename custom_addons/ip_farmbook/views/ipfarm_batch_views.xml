@@ -22,6 +22,10 @@
         <field name="arch" type="xml">
             <form string="Batch">
                 <sheet>
+                    <div class="d-flex justify-content-end mb-2">
+                        <button name="action_tandai_selesai" type="object" string="Tandai Selesai"
+                            class="btn btn-primary" invisible="state == 'selesai'"/>
+                    </div>
                     <group>
                         <group>
                             <field name="name" string="Nama Batch" readonly="1"/>
@@ -30,6 +34,7 @@
                             <field name="bibit_id"/>
                             <field name="jumlah_bibit"/>
                             <field name="ruangan_id"/>
+                            <field name="estimasi_panen" readonly="state == 'selesai'"/>
                         </group>
                         <group>
                             <field name="state" readonly="1" widget="badge" decoration-success="state == 'aktif'" decoration-muted="state == 'selesai'"/>
@@ -91,6 +96,7 @@
         <field name="name">Batch</field>
         <field name="res_model">ipfarm.batch</field>
         <field name="view_mode">tree,form</field>
+        <field name="views" eval="[(ref('view_ipfarm_batch_tree'), 'tree'), (ref('view_ipfarm_batch_form'), 'form')]"/>
         <field name="search_view_id" ref="view_ipfarm_batch_search"/>
     </record>
 </odoo>
