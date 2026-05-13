@@ -3,7 +3,7 @@
         <field name="name">ipfarm.ruangan.tree</field>
         <field name="model">ipfarm.ruangan</field>
         <field name="arch" type="xml">
-            <tree string="Ruangan Tanam">
+            <tree string="Ruangan Tanam" create="0">
                 <field name="kode"/>
                 <field name="name"/>
                 <field name="lokasi"/>
