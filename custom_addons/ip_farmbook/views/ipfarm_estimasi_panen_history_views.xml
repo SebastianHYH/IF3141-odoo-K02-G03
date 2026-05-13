@@ -21,29 +21,4 @@
             </form>
         </field>
     </record>
-
-    <record id="view_ipfarm_batch_estimasi_tree" model="ir.ui.view">
-        <field name="name">ipfarm.batch.estimasi.tree</field>
-        <field name="model">ipfarm.batch</field>
-        <field name="arch" type="xml">
-            <tree string="Kelola Batch" create="0" delete="0">
-                <field name="name" string="Nama Batch"/>
-                <field name="penanaman_id" string="Kode Penanaman"/>
-                <field name="bibit_id"/>
-                <field name="ruangan_id"/>
-                <field name="tanggal_tanam"/>
-                <field name="estimasi_panen"/>
-                <field name="state" widget="badge" decoration-success="state == 'aktif'" decoration-muted="state == 'selesai'"/>
-                <button name="action_edit_estimasi" type="object" icon="fa-pencil" title="Edit Estimasi" invisible="state == 'selesai'"/>
-                <button name="action_tandai_selesai" type="object" icon="fa-check" title="Tandai Selesai" invisible="state == 'selesai'"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="action_ipfarm_estimasi_panen" model="ir.actions.act_window">
-        <field name="name">Kelola Batch</field>
-        <field name="res_model">ipfarm.batch</field>
-        <field name="view_mode">tree</field>
-        <field name="views" eval="[(ref('view_ipfarm_batch_estimasi_tree'), 'tree')]"/>
-    </record>
 </odoo>
