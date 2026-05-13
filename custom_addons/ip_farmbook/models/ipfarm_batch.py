@@ -37,9 +37,7 @@ class IPFarmBatch(models.Model):
     catatan_estimasi = fields.Text(string="Catatan Estimasi")
     state = fields.Selection(
         [
-            ("draft", "Draft"),
             ("aktif", "Aktif"),
-            ("panen", "Panen"),
             ("selesai", "Selesai"),
         ],
         string="Status",

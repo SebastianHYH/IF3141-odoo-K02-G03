@@ -42,17 +42,6 @@ class IPFarmPenanaman(models.Model):
         ondelete="restrict",
         default=lambda self: self._default_pegawai_id(),
     )
-    status = fields.Selection(
-        [
-            ("draft", "Draft"),
-            ("aktif", "Aktif"),
-            ("panen", "Panen"),
-            ("selesai", "Selesai"),
-        ],
-        string="Status Penanaman",
-        default="aktif",
-        required=True,
-    )
     catatan = fields.Text(string="Catatan")
     batch_ids = fields.One2many("ipfarm.batch", "penanaman_id", string="Batch")
     batch_count = fields.Integer(string="Jumlah Batch Dibuat", compute="_compute_batch_count")
@@ -123,7 +112,7 @@ class IPFarmPenanaman(models.Model):
                         "tanggal_tanam": penanaman.tanggal_penanaman,
                         "jumlah_bibit": qty,
                         "estimasi_panen": estimasi,
-                        "state": penanaman.status,
+                        "state": "aktif",
                         "catatan": penanaman.catatan,
                     }
                 )

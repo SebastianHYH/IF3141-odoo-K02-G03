@@ -140,7 +140,6 @@ penanaman_data = [
         'jumlah_bibit': 300,
         'ruangan_id': ruangans['RNG-A'].id,
         'pegawai_id': emp_budi.id,
-        'status': 'aktif',
         'catatan': 'Batch jamur tiram musim pertama',
     },
     # Jamur Shiitake - aktif (30 hari lalu, estimasi 60 hari)
@@ -151,7 +150,6 @@ penanaman_data = [
         'jumlah_bibit': 200,
         'ruangan_id': ruangans['RNG-A'].id,
         'pegawai_id': emp_budi.id,
-        'status': 'aktif',
         'catatan': 'Batch shiitake premium',
     },
     # Mint - sudah bisa panen (35 hari lalu, estimasi 30 hari)
@@ -162,7 +160,6 @@ penanaman_data = [
         'jumlah_bibit': 120,
         'ruangan_id': ruangans['RNG-B'].id,
         'pegawai_id': emp_sari.id,
-        'status': 'aktif',
         'catatan': 'Mint untuk kebutuhan resto lokal',
     },
     # Rosemary - aktif (40 hari lalu, estimasi 90 hari)
@@ -173,7 +170,6 @@ penanaman_data = [
         'jumlah_bibit': 80,
         'ruangan_id': ruangans['RNG-B'].id,
         'pegawai_id': emp_sari.id,
-        'status': 'aktif',
         'catatan': 'Rosemary organik',
     },
     # Asparagus - aktif (20 hari lalu)
@@ -184,7 +180,6 @@ penanaman_data = [
         'jumlah_bibit': 160,
         'ruangan_id': ruangans['RNG-C'].id,
         'pegawai_id': emp_raka.id,
-        'status': 'aktif',
         'catatan': 'Asparagus green premium',
     },
     # Golden Berry - aktif (10 hari lalu)
@@ -195,7 +190,6 @@ penanaman_data = [
         'jumlah_bibit': 60,
         'ruangan_id': ruangans['RNG-C'].id,
         'pegawai_id': emp_raka.id,
-        'status': 'aktif',
         'catatan': 'Golden berry eksperimen pertama',
     },
 ]

@@ -11,7 +11,7 @@
                 <field name="jumlah_bibit"/>
                 <field name="tanggal_tanam"/>
                 <field name="estimasi_panen"/>
-                <field name="state"/>
+                <field name="state" widget="badge" decoration-success="state == 'aktif'" decoration-muted="state == 'selesai'"/>
             </tree>
         </field>
     </record>
@@ -82,7 +82,7 @@
                 <field name="tanggal_tanam"/>
                 <field name="estimasi_panen"/>
                 <filter name="aktif" string="Aktif" domain="[('state', '=', 'aktif')]"/>
-                <filter name="panen" string="Panen" domain="[('state', '=', 'panen')]"/>
+                <filter name="selesai" string="Selesai" domain="[('state', '=', 'selesai')]"/>
                 <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
                 <filter name="group_ruangan" string="Ruangan" context="{'group_by': 'ruangan_id'}"/>
             </search>

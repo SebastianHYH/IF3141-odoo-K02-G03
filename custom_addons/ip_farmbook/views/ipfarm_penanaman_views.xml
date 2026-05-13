@@ -11,7 +11,6 @@
                 <field name="jumlah_bibit"/>
                 <field name="ruangan_id"/>
                 <field name="pegawai_id"/>
-                <field name="status" widget="badge"/>
             </tree>
         </field>
     </record>
@@ -22,7 +21,6 @@
             <form string="Input Penanaman Bibit" delete="0">
                 <header>
                     <button name="action_show_success" type="object" string="Tampilkan Notifikasi" class="oe_highlight"/>
-                    <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
                     <group>
@@ -70,7 +68,6 @@
                 <field name="ruangan_id"/>
                 <field name="pegawai_id"/>
                 <field name="tanggal_penanaman"/>
-                <filter name="aktif" string="Berjalan" domain="[('status', 'in', ['draft', 'aktif'])]"/>
                 <filter name="group_ruangan" string="Ruangan" context="{'group_by': 'ruangan_id'}"/>
                 <filter name="group_bibit" string="Bibit" context="{'group_by': 'bibit_id'}"/>
                 <filter name="group_tanggal" string="Tanggal" context="{'group_by': 'tanggal_penanaman'}"/>

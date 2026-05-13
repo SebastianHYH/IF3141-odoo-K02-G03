@@ -8,7 +8,6 @@
                 <field name="name"/>
                 <field name="lokasi"/>
                 <field name="kapasitas"/>
-                <field name="active"/>
             </tree>
         </field>
     </record>
