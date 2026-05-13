@@ -3,7 +3,7 @@
         <field name="name">ipfarm.bibit.tree</field>
         <field name="model">ipfarm.bibit</field>
         <field name="arch" type="xml">
-            <tree string="Bibit" create="0">
+            <tree string="Bibit">
                 <field name="kode"/>
                 <field name="name"/>
                 <field name="kategori"/>

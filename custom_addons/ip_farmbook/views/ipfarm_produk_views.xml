@@ -3,7 +3,7 @@
         <field name="name">ipfarm.produk.tree</field>
         <field name="model">ipfarm.produk</field>
         <field name="arch" type="xml">
-            <tree string="Ketersediaan Stok Produk" create="0">
+            <tree string="Ketersediaan Stok Produk">
                 <field name="kode"/>
                 <field name="name"/>
                 <field name="kategori"/>
