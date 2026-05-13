@@ -93,6 +93,9 @@ class IPFarmBatch(models.Model):
                 vals["pegawai_last_edit_id"] = employee.id
         return super().create(vals_list)
 
+    def action_tandai_selesai(self):
+        self.state = 'selesai'
+
     def action_edit_estimasi(self):
         return {
             'name': 'Update Estimasi Panen',

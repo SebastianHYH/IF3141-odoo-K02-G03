@@ -76,7 +76,7 @@
 
     <menuitem
         id="menu_ipfarm_estimasi_panen"
-        name="Estimasi Waktu Panen"
+        name="Kelola Batch"
         parent="menu_ipfarm_produksi"
         action="action_ipfarm_estimasi_panen"
         sequence="20"
