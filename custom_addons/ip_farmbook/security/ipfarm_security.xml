@@ -6,7 +6,7 @@
 
     <record id="group_ipfarm_user" model="res.groups">
         <field name="name">User</field>
-        <field name="category_id" ref="module_category_ipfarm"/>
+        <field name="category_id" eval="False"/>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
     </record>
 
