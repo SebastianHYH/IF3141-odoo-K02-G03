@@ -127,78 +127,55 @@ for d in produk_data:
     print(f"    Dibuat: {d['name']} ({uom_name})")
 
 # ─────────────────────────────────────────────
-# 5. PENANAMAN (batch otomatis dibuat via create())
+# 5. PENANAMAN + BATCH (dibuat manual per batch)
 # ─────────────────────────────────────────────
-print("\n[5] Membuat penanaman...")
+print("\n[5] Membuat penanaman dan batch...")
 
-penanaman_data = [
-    # Jamur Tiram - sudah bisa panen (50 hari lalu, estimasi 45 hari)
-    {
-        'tanggal_penanaman': today - timedelta(days=50),
-        'bibit_id': bibits['Jamur Tiram'].id,
-        'jumlah_batch': 3,
-        'jumlah_bibit': 300,
-        'ruangan_id': ruangans['RNG-A'].id,
-        'pegawai_id': emp_budi.id,
-        'catatan': 'Batch jamur tiram musim pertama',
-    },
-    # Jamur Shiitake - aktif (30 hari lalu, estimasi 60 hari)
-    {
-        'tanggal_penanaman': today - timedelta(days=30),
-        'bibit_id': bibits['Jamur Shiitake'].id,
-        'jumlah_batch': 2,
-        'jumlah_bibit': 200,
-        'ruangan_id': ruangans['RNG-A'].id,
-        'pegawai_id': emp_budi.id,
-        'catatan': 'Batch shiitake premium',
-    },
-    # Mint - sudah bisa panen (35 hari lalu, estimasi 30 hari)
-    {
-        'tanggal_penanaman': today - timedelta(days=35),
-        'bibit_id': bibits['Mint'].id,
-        'jumlah_batch': 2,
-        'jumlah_bibit': 120,
-        'ruangan_id': ruangans['RNG-B'].id,
-        'pegawai_id': emp_sari.id,
-        'catatan': 'Mint untuk kebutuhan resto lokal',
-    },
-    # Rosemary - aktif (40 hari lalu, estimasi 90 hari)
-    {
-        'tanggal_penanaman': today - timedelta(days=40),
-        'bibit_id': bibits['Rosemary'].id,
-        'jumlah_batch': 1,
-        'jumlah_bibit': 80,
-        'ruangan_id': ruangans['RNG-B'].id,
-        'pegawai_id': emp_sari.id,
-        'catatan': 'Rosemary organik',
-    },
-    # Asparagus - aktif (20 hari lalu)
-    {
-        'tanggal_penanaman': today - timedelta(days=20),
-        'bibit_id': bibits['Asparagus'].id,
-        'jumlah_batch': 2,
-        'jumlah_bibit': 160,
-        'ruangan_id': ruangans['RNG-C'].id,
-        'pegawai_id': emp_raka.id,
-        'catatan': 'Asparagus green premium',
-    },
-    # Golden Berry - aktif (10 hari lalu)
-    {
-        'tanggal_penanaman': today - timedelta(days=10),
-        'bibit_id': bibits['Golden Berry'].id,
-        'jumlah_batch': 1,
-        'jumlah_bibit': 60,
-        'ruangan_id': ruangans['RNG-C'].id,
-        'pegawai_id': emp_raka.id,
-        'catatan': 'Golden berry eksperimen pertama',
-    },
-]
+def buat_penanaman(tanggal, pegawai, catatan=''):
+    rec = env['ipfarm.penanaman'].create({
+        'tanggal_penanaman': tanggal,
+        'pegawai_id': pegawai.id,
+        'catatan': catatan,
+    })
+    print(f"    Dibuat: {rec.name}")
+    return rec
 
-penanaman_records = []
-for d in penanaman_data:
-    rec = env['ipfarm.penanaman'].create(d)
-    penanaman_records.append(rec)
-    print(f"    Dibuat: {rec.name} - {bibits[next(b['name'] for b in bibit_data if bibits[b['name']].id == d['bibit_id'])].name}")
+def buat_batch(penanaman, bibit, jumlah, ruangan, estimasi_panen, state='aktif'):
+    batch = env['ipfarm.batch'].create({
+        'penanaman_id': penanaman.id,
+        'bibit_id': bibit.id,
+        'ruangan_id': ruangan.id,
+        'jumlah_bibit': jumlah,
+        'estimasi_panen': estimasi_panen,
+        'state': state,
+    })
+    print(f"      Batch: {batch.name} - {bibit.name} ({jumlah} bibit, est. panen {estimasi_panen})")
+    return batch
+
+# Sesi tanam 1: Jamur Tiram (3 batch, sudah selesai panen)
+pen_tiram = buat_penanaman(today - timedelta(days=50), emp_budi, 'Sesi tanam jamur tiram musim pertama')
+batch_tiram_1 = buat_batch(pen_tiram, bibits['Jamur Tiram'], 100, ruangans['RNG-A'], today - timedelta(days=5), state='selesai')
+batch_tiram_2 = buat_batch(pen_tiram, bibits['Jamur Tiram'], 100, ruangans['RNG-A'], today - timedelta(days=3), state='selesai')
+batch_tiram_3 = buat_batch(pen_tiram, bibits['Jamur Tiram'], 100, ruangans['RNG-A'], today - timedelta(days=2), state='selesai')
+
+# Sesi tanam 2: Jamur Shiitake (2 batch, aktif)
+pen_shiitake = buat_penanaman(today - timedelta(days=30), emp_budi, 'Sesi tanam shiitake premium')
+batch_shiitake_1 = buat_batch(pen_shiitake, bibits['Jamur Shiitake'], 100, ruangans['RNG-A'], today + timedelta(days=30))
+batch_shiitake_2 = buat_batch(pen_shiitake, bibits['Jamur Shiitake'], 100, ruangans['RNG-A'], today + timedelta(days=30))
+
+# Sesi tanam 3: Mint + Rosemary (dalam 1 sesi tanam herbal)
+pen_herbal = buat_penanaman(today - timedelta(days=35), emp_sari, 'Sesi tanam herbal - mint dan rosemary')
+batch_mint_1 = buat_batch(pen_herbal, bibits['Mint'], 60, ruangans['RNG-B'], today - timedelta(days=5), state='selesai')
+batch_mint_2 = buat_batch(pen_herbal, bibits['Mint'], 60, ruangans['RNG-B'], today - timedelta(days=4), state='selesai')
+batch_rosemary_1 = buat_batch(pen_herbal, bibits['Rosemary'], 80, ruangans['RNG-B'], today + timedelta(days=55))
+
+# Sesi tanam 4: Asparagus + Golden Berry
+pen_sayur = buat_penanaman(today - timedelta(days=20), emp_raka, 'Sesi tanam sayur dan buah')
+batch_asparagus_1 = buat_batch(pen_sayur, bibits['Asparagus'], 80, ruangans['RNG-C'], today + timedelta(days=40))
+batch_asparagus_2 = buat_batch(pen_sayur, bibits['Asparagus'], 80, ruangans['RNG-C'], today + timedelta(days=40))
+batch_goldenberry_1 = buat_batch(pen_sayur, bibits['Golden Berry'], 60, ruangans['RNG-C'], today + timedelta(days=65))
+
+penanaman_records = [pen_tiram, pen_shiitake, pen_herbal, pen_sayur]
 
 env.cr.commit()
 print("    Penanaman & batch berhasil disimpan.")
@@ -209,9 +186,8 @@ print("    Penanaman & batch berhasil disimpan.")
 print("\n[6] Update estimasi panen...")
 
 # Update estimasi untuk Shiitake (maju 10 hari karena pertumbuhan bagus)
-batch_shiitake = penanaman_records[1].batch_ids[0]
 env['ipfarm.estimasi_panen_history'].create({
-    'batch_id': batch_shiitake.id,
+    'batch_id': batch_shiitake_1.id,
     'estimasi_panen_baru': today + timedelta(days=20),
     'pegawai_id': emp_budi.id,
     'tanggal_pembaruan': today - timedelta(days=5),
@@ -219,9 +195,8 @@ env['ipfarm.estimasi_panen_history'].create({
 })
 
 # Update estimasi untuk Rosemary (mundur karena suhu kurang optimal)
-batch_rosemary = penanaman_records[3].batch_ids[0]
 env['ipfarm.estimasi_panen_history'].create({
-    'batch_id': batch_rosemary.id,
+    'batch_id': batch_rosemary_1.id,
     'estimasi_panen_baru': today + timedelta(days=60),
     'pegawai_id': emp_sari.id,
     'tanggal_pembaruan': today - timedelta(days=2),
@@ -250,15 +225,13 @@ def catat_panen(batch, produk, jumlah, tgl, pegawai, catatan=''):
     return panen
 
 # Panen Jamur Tiram (3 batch) → satuan kg
-batches_tiram = penanaman_records[0].batch_ids
-catat_panen(batches_tiram[0], produks['Jamur Tiram Segar'], 18.5, today - timedelta(days=4), emp_budi, 'Panen flush pertama jamur tiram')
-catat_panen(batches_tiram[1], produks['Jamur Tiram Segar'], 16.0, today - timedelta(days=3), emp_budi, 'Panen flush pertama batch 2')
-catat_panen(batches_tiram[2], produks['Jamur Tiram Segar'], 14.5, today - timedelta(days=2), emp_budi, 'Panen flush pertama batch 3')
+catat_panen(batch_tiram_1, produks['Jamur Tiram Segar'], 18.5, today - timedelta(days=4), emp_budi, 'Panen flush pertama jamur tiram')
+catat_panen(batch_tiram_2, produks['Jamur Tiram Segar'], 16.0, today - timedelta(days=3), emp_budi, 'Panen flush pertama batch 2')
+catat_panen(batch_tiram_3, produks['Jamur Tiram Segar'], 14.5, today - timedelta(days=2), emp_budi, 'Panen flush pertama batch 3')
 
 # Panen Mint (2 batch) → satuan liter (sari mint segar)
-batches_mint = penanaman_records[2].batch_ids
-catat_panen(batches_mint[0], produks['Mint Segar'], 5.0, today - timedelta(days=5), emp_sari, 'Panen mint batch 1 - 5L sari mint')
-catat_panen(batches_mint[1], produks['Mint Segar'], 4.5, today - timedelta(days=4), emp_sari, 'Panen mint batch 2 - 4.5L sari mint')
+catat_panen(batch_mint_1, produks['Mint Segar'], 5.0, today - timedelta(days=5), emp_sari, 'Panen mint batch 1 - 5L sari mint')
+catat_panen(batch_mint_2, produks['Mint Segar'], 4.5, today - timedelta(days=4), emp_sari, 'Panen mint batch 2 - 4.5L sari mint')
 
 env.cr.commit()
 print("    Panen tersimpan, stok diperbarui otomatis.")
