@@ -22,7 +22,7 @@
         <field name="arch" type="xml">
             <form string="Batch">
                 <sheet>
-                    <div class="d-flex justify-content-end mb-2">
+                    <div class="d-flex justify-content-end mb-2" groups="ip_farmbook.group_ipfarm_production,ip_farmbook.group_ipfarm_management">
                         <button name="action_tandai_selesai" type="object" string="Tandai Selesai"
                             class="btn btn-primary" invisible="state == 'selesai'"/>
                     </div>
