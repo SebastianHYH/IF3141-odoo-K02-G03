@@ -99,25 +99,10 @@
 
     <menuitem
         id="menu_ipfarm_stok"
-        name="Stok"
+        name="Riwayat Stok"
         parent="menu_ipfarm_root"
-        sequence="40"
-        groups="ip_farmbook.group_ipfarm_user"/>
-
-    <menuitem
-        id="menu_ipfarm_ketersediaan_stok"
-        name="Ketersediaan Stok Produk"
-        parent="menu_ipfarm_stok"
-        action="action_ipfarm_ketersediaan_stok"
-        sequence="10"
-        groups="ip_farmbook.group_ipfarm_user"/>
-
-    <menuitem
-        id="menu_ipfarm_histori_stok"
-        name="Riwayat Perubahan Stok"
-        parent="menu_ipfarm_stok"
         action="action_ipfarm_histori_stok"
-        sequence="20"
+        sequence="12"
         groups="ip_farmbook.group_ipfarm_user"/>
 
     <menuitem

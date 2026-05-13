@@ -44,7 +44,7 @@ class IPFarmDashboardWizard(models.TransientModel):
     def _compute_kpi(self):
         for wizard in self:
             batch_domain = [("state", "=", "aktif")] + wizard._batch_filter_domain()
-            penanaman_domain = [("status", "in", ["draft", "aktif"])]
+            penanaman_domain = []
             if wizard.ruangan_id:
                 penanaman_domain.append(("ruangan_id", "=", wizard.ruangan_id.id))
             if wizard.date_start:
