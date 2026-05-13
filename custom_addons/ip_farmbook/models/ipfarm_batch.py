@@ -93,6 +93,17 @@ class IPFarmBatch(models.Model):
                 vals["pegawai_last_edit_id"] = employee.id
         return super().create(vals_list)
 
+    def action_edit_estimasi(self):
+        return {
+            'name': 'Update Estimasi Panen',
+            'type': 'ir.actions.act_window',
+            'res_model': 'ipfarm.batch',
+            'res_id': self.id,
+            'view_mode': 'form',
+            'views': [(self.env.ref('ip_farmbook.view_ipfarm_batch_estimasi_form').id, 'form')],
+            'target': 'new',
+        }
+
     def write(self, vals):
         employee = self._get_current_employee()
         if employee:
