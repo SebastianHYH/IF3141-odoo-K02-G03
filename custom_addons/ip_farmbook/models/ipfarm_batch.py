@@ -7,11 +7,11 @@ class IPFarmBatch(models.Model):
     _description = "Batch Penanaman IP FarmBook"
     _order = "tanggal_tanam desc, name"
 
-    name = fields.Char(string="Nama Batch/Penanaman", required=True)
+    name = fields.Char(string="Nama Batch", required=True)
     active = fields.Boolean(default=True)
     penanaman_id = fields.Many2one(
         "ipfarm.penanaman",
-        string="Penanaman",
+        string="Kode Penanaman",
         ondelete="restrict",
         index=True,
     )
@@ -35,11 +35,6 @@ class IPFarmBatch(models.Model):
     )
     tanggal_update_estimasi = fields.Date(string="Tanggal Update Estimasi")
     catatan_estimasi = fields.Text(string="Catatan Estimasi")
-    produk_rencana_id = fields.Many2one(
-        "ipfarm.produk",
-        string="Produk Rencana",
-        ondelete="restrict",
-    )
     state = fields.Selection(
         [
             ("draft", "Draft"),

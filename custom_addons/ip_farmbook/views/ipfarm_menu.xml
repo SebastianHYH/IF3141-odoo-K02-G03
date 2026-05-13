@@ -38,7 +38,7 @@
 
     <menuitem
         id="menu_ipfarm_batch"
-        name="Batch/Penanaman"
+        name="Batch"
         parent="menu_ipfarm_master"
         action="action_ipfarm_batch"
         sequence="40"
