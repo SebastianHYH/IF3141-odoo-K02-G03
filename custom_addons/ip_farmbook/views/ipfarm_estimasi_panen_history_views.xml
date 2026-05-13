@@ -2,6 +2,7 @@
     <record id="view_ipfarm_batch_estimasi_form" model="ir.ui.view">
         <field name="name">ipfarm.batch.estimasi.form</field>
         <field name="model">ipfarm.batch</field>
+        <field name="priority">100</field>
         <field name="arch" type="xml">
             <form string="Update Estimasi Panen">
                 <sheet>
