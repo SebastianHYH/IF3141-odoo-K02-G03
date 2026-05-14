@@ -3,16 +3,16 @@
         <field name="name">ipfarm.produk.tree</field>
         <field name="model">ipfarm.produk</field>
         <field name="arch" type="xml">
-            <tree string="Ketersediaan Stok Produk" decoration-danger="status_stok == 'habis'" decoration-warning="status_stok == 'rendah'" decoration-success="status_stok == 'aman'">
-                <field name="name"/>
+            <tree string="Ketersediaan Stok Produk">
                 <field name="kode"/>
+                <field name="name"/>
                 <field name="kategori"/>
                 <field name="stok_tersedia" sum="Total Stok Saat Ini"/>
                 <field name="uom_id"/>
                 <field name="total_stok_masuk_panen" sum="Total Masuk Panen"/>
                 <field name="total_stok_keluar_pemrosesan" sum="Total Keluar Pemrosesan"/>
                 <field name="last_stock_update"/>
-                <field name="status_stok" widget="badge"/>
+                <field name="status_stok" widget="badge" decoration-danger="status_stok == 'habis'" decoration-warning="status_stok == 'rendah'" decoration-success="status_stok == 'aman'"/>
             </tree>
         </field>
     </record>
@@ -33,7 +33,7 @@
                         <group>
                             <field name="stok_tersedia" readonly="1"/>
                             <field name="minimum_stok"/>
-                            <field name="status_stok" widget="badge" readonly="1"/>
+                            <field name="status_stok" widget="badge" readonly="1" decoration-danger="status_stok == 'habis'" decoration-warning="status_stok == 'rendah'" decoration-success="status_stok == 'aman'"/>
                             <field name="last_stock_update" readonly="1"/>
                             <field name="active"/>
                         </group>

@@ -126,8 +126,6 @@ class IPFarmPanen(models.Model):
                 catatan=panen.catatan,
             )
             panen.histori_stok_id = history.id
-            if panen.batch_id.state == "aktif":
-                panen.batch_id.state = "panen"
         return records
 
     def write(self, vals):

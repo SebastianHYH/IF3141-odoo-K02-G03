@@ -38,7 +38,7 @@
 
     <menuitem
         id="menu_ipfarm_batch"
-        name="Batch/Penanaman"
+        name="Batch"
         parent="menu_ipfarm_master"
         action="action_ipfarm_batch"
         sequence="40"
@@ -74,13 +74,6 @@
         sequence="10"
         groups="ip_farmbook.group_ipfarm_production,ip_farmbook.group_ipfarm_management"/>
 
-    <menuitem
-        id="menu_ipfarm_estimasi_panen"
-        name="Estimasi Waktu Panen"
-        parent="menu_ipfarm_produksi"
-        action="action_ipfarm_estimasi_panen"
-        sequence="20"
-        groups="ip_farmbook.group_ipfarm_production,ip_farmbook.group_ipfarm_management"/>
 
     <menuitem
         id="menu_ipfarm_processing"
@@ -99,25 +92,10 @@
 
     <menuitem
         id="menu_ipfarm_stok"
-        name="Stok"
+        name="Riwayat Stok"
         parent="menu_ipfarm_root"
-        sequence="40"
-        groups="ip_farmbook.group_ipfarm_user"/>
-
-    <menuitem
-        id="menu_ipfarm_ketersediaan_stok"
-        name="Ketersediaan Stok Produk"
-        parent="menu_ipfarm_stok"
-        action="action_ipfarm_ketersediaan_stok"
-        sequence="10"
-        groups="ip_farmbook.group_ipfarm_user"/>
-
-    <menuitem
-        id="menu_ipfarm_histori_stok"
-        name="Riwayat Perubahan Stok"
-        parent="menu_ipfarm_stok"
         action="action_ipfarm_histori_stok"
-        sequence="20"
+        sequence="12"
         groups="ip_farmbook.group_ipfarm_user"/>
 
     <menuitem

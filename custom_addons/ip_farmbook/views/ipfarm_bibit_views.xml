@@ -8,7 +8,6 @@
                 <field name="name"/>
                 <field name="kategori"/>
                 <field name="estimasi_hari_panen"/>
-                <field name="active"/>
             </tree>
         </field>
     </record>

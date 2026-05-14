@@ -5,28 +5,35 @@ from odoo.exceptions import ValidationError
 class IPFarmBatch(models.Model):
     _name = "ipfarm.batch"
     _description = "Batch Penanaman IP FarmBook"
-    _order = "tanggal_tanam desc, name"
+    _order = "name"
 
-    name = fields.Char(string="Nama Batch/Penanaman", required=True)
+    name = fields.Char(string="Nama Batch", required=True, copy=False, readonly=True, default="New")
     active = fields.Boolean(default=True)
     penanaman_id = fields.Many2one(
         "ipfarm.penanaman",
-        string="Penanaman",
+        string="Kode Penanaman",
         ondelete="restrict",
+        required=True,
         index=True,
     )
     bibit_id = fields.Many2one(
         "ipfarm.bibit",
         string="Bibit",
         ondelete="restrict",
+        required=True,
     )
     ruangan_id = fields.Many2one(
         "ipfarm.ruangan",
         string="Ruangan Tanam",
         ondelete="restrict",
+        required=True,
     )
-    tanggal_tanam = fields.Date(string="Tanggal Tanam")
-    jumlah_bibit = fields.Integer(string="Jumlah Bibit")
+    tanggal_tanam = fields.Date(
+        related="penanaman_id.tanggal_penanaman",
+        string="Tanggal Tanam",
+        store=True,
+    )
+    jumlah_bibit = fields.Integer(string="Jumlah Bibit", required=True)
     estimasi_panen = fields.Date(string="Estimasi Panen")
     pegawai_estimasi_id = fields.Many2one(
         "hr.employee",
@@ -35,16 +42,15 @@ class IPFarmBatch(models.Model):
     )
     tanggal_update_estimasi = fields.Date(string="Tanggal Update Estimasi")
     catatan_estimasi = fields.Text(string="Catatan Estimasi")
-    produk_rencana_id = fields.Many2one(
-        "ipfarm.produk",
-        string="Produk Rencana",
+    pegawai_last_edit_id = fields.Many2one(
+        "hr.employee",
+        string="Terakhir Diubah Oleh",
         ondelete="restrict",
+        readonly=True,
     )
     state = fields.Selection(
         [
-            ("draft", "Draft"),
             ("aktif", "Aktif"),
-            ("panen", "Panen"),
             ("selesai", "Selesai"),
         ],
         string="Status",
@@ -59,6 +65,9 @@ class IPFarmBatch(models.Model):
     )
     panen_ids = fields.One2many("ipfarm.panen", "batch_id", string="Hasil Panen")
 
+    def _get_current_employee(self):
+        return self.env["hr.employee"].search([("user_id", "=", self.env.uid)], limit=1)
+
     @api.constrains("jumlah_bibit")
     def _check_jumlah_bibit(self):
         for batch in self:
@@ -70,3 +79,36 @@ class IPFarmBatch(models.Model):
         for batch in self:
             if batch.estimasi_panen and batch.tanggal_tanam and batch.estimasi_panen < batch.tanggal_tanam:
                 raise ValidationError(_("Estimasi panen tidak boleh lebih awal dari tanggal tanam."))
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        employee = self._get_current_employee()
+        for vals in vals_list:
+            if vals.get("name", "New") == "New":
+                penanaman_id = vals.get("penanaman_id")
+                penanaman = self.env["ipfarm.penanaman"].browse(penanaman_id)
+                existing_count = self.search_count([("penanaman_id", "=", penanaman_id)])
+                vals["name"] = f"{penanaman.name}/B{existing_count + 1:02d}"
+            if employee:
+                vals["pegawai_last_edit_id"] = employee.id
+        return super().create(vals_list)
+
+    def action_tandai_selesai(self):
+        self.state = 'selesai'
+
+    def action_edit_estimasi(self):
+        return {
+            'name': 'Update Estimasi Panen',
+            'type': 'ir.actions.act_window',
+            'res_model': 'ipfarm.batch',
+            'res_id': self.id,
+            'view_mode': 'form',
+            'views': [(self.env.ref('ip_farmbook.view_ipfarm_batch_estimasi_form').id, 'form')],
+            'target': 'new',
+        }
+
+    def write(self, vals):
+        employee = self._get_current_employee()
+        if employee:
+            vals["pegawai_last_edit_id"] = employee.id
+        return super().write(vals)

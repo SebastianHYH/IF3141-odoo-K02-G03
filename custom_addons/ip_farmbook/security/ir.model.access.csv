@@ -1,11 +1,11 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_ipfarm_bibit_admin,ipfarm.bibit admin,model_ipfarm_bibit,base.group_system,1,1,1,1
 access_ipfarm_bibit_user,ipfarm.bibit user,model_ipfarm_bibit,ip_farmbook.group_ipfarm_user,1,0,0,0
-access_ipfarm_bibit_seedling,ipfarm.bibit seedling,model_ipfarm_bibit,ip_farmbook.group_ipfarm_seedling,1,1,1,0
+access_ipfarm_bibit_seedling,ipfarm.bibit seedling,model_ipfarm_bibit,ip_farmbook.group_ipfarm_seedling,1,0,0,0
 access_ipfarm_bibit_management,ipfarm.bibit management,model_ipfarm_bibit,ip_farmbook.group_ipfarm_management,1,1,1,1
 access_ipfarm_ruangan_admin,ipfarm.ruangan admin,model_ipfarm_ruangan,base.group_system,1,1,1,1
 access_ipfarm_ruangan_user,ipfarm.ruangan user,model_ipfarm_ruangan,ip_farmbook.group_ipfarm_user,1,0,0,0
-access_ipfarm_ruangan_seedling,ipfarm.ruangan seedling,model_ipfarm_ruangan,ip_farmbook.group_ipfarm_seedling,1,1,1,0
+access_ipfarm_ruangan_seedling,ipfarm.ruangan seedling,model_ipfarm_ruangan,ip_farmbook.group_ipfarm_seedling,1,0,0,0
 access_ipfarm_ruangan_management,ipfarm.ruangan management,model_ipfarm_ruangan,ip_farmbook.group_ipfarm_management,1,1,1,1
 access_ipfarm_penanaman_admin,ipfarm.penanaman admin,model_ipfarm_penanaman,base.group_system,1,1,1,1
 access_ipfarm_penanaman_user,ipfarm.penanaman user,model_ipfarm_penanaman,ip_farmbook.group_ipfarm_user,1,0,0,0
